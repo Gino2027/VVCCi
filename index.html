@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VVCCI Election Results 2024</title>
+<title>VVCCI Election Results 2026</title>
 <style>
   :root {
     /* BACKEND SETTINGS: customize these values directly in this file */
@@ -83,6 +83,29 @@
     body { background: #fff; padding: 0; }
 .candidate { break-inside: avoid; box-shadow: none; }
   }
+
+  .results-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 10px;
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: .6px;
+    text-transform: uppercase;
+}
+
+#results-status {
+    color: var(--ink);
+}
+
+#results-datetime {
+    background: var(--ink);
+    color: white;
+    padding: 4px 8px;
+}
 </style>
 </head>
 <body>
@@ -91,10 +114,8 @@
     <h1>VVCCI Election Results 2026</h1>
     <div class="results-header">
     <span id="results-status">
-        PARTIAL AND UNOFFICIAL RESULTS
     </span>
     <span id="results-datetime">
-        NOVEMBER 21, 2026 / 8:00 PM
     </span>
 </div>
   </header>
@@ -162,7 +183,7 @@ function handleSheetData(data) {
     // Match each Google Sheets row to its existing card by candidate name.
     // This keeps each candidate's photo attached to the correct person.
     const normalizeName = value =>
-        String(value || "").trim().toUpperCase().replace(/\\s+/g, " ");
+    String(value || "").trim().toUpperCase().replace(/\s+/g, " ");
 
     const cardByName = new Map(
         existingCards.map(card => [
@@ -171,7 +192,7 @@ function handleSheetData(data) {
         ])
     );
 
-    const rankedResults = data
+    const rankedResults = data.results
         .map((item, originalIndex) => ({
             name: item.name,
             votes: Number(item.votes) || 0,
@@ -192,6 +213,12 @@ function handleSheetData(data) {
         // Reordering the existing card preserves its photo and other styling.
         resultsContainer.appendChild(card);
     });
+
+    document.getElementById("results-status").textContent =
+    data.metadata.status;
+
+document.getElementById("results-datetime").textContent =
+    data.metadata.date + " / " + data.metadata.time;
 }
 
 function syncGoogleSheet() {
