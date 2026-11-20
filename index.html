@@ -1,131 +1,212 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>VVCCi Club Election 2025</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400&display=swap">
-  <style>
-    body {
-      margin: 0;
-      background-color: #6dbe4a;
-      font-family: 'Segoe UI', sans-serif;
-      color: #fff;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VVCCI Election Results 2024</title>
+<style>
+  :root {
+    /* BACKEND SETTINGS: customize these values directly in this file */
+    --yellow: #00ef6c;
+    --ink: #101010;
+    --muted: #666;
+    --font: "Arial", sans-serif;
+    --number-size: 26px;
+    --name-size: 16px;
+    --vote-size: 32px;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 28px 16px; background: #f0f0ed; color: var(--ink);
+    font-family: var(--font);
+  }
+  .wrap { max-width: 1050px; margin: auto; }
 
-    .container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      padding: 2rem;
-    }
+  .masthead { text-align: center; margin: 0 0 16px; }
+  .masthead h1 {
+    margin: 0; font-size: clamp(30px, 5vw, 58px); line-height: .98;
+    font-weight: 1000; letter-spacing: -2px; text-transform: uppercase;
+  }
 
-    .card {
-      background-color: #6dbe4a;
-      border-radius: 16px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
-      padding: 2rem;
-      width: 100%;
-      max-width: 960px;
-      text-align: center;
-    }
+  .masthead p {
+    margin: 10px 0 0; font-size: 12px; font-weight: 800; letter-spacing: .7px;
+    text-transform: uppercase;
+  }
+  .masthead .asof { background: var(--ink); color: white; padding: 3px 8px; }
+  .results {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px 14px;
+  }
+  .candidate {
+    min-width: 0; display: grid; grid-template-columns: 48px 66px minmax(0,1fr) auto;
+    align-items: center; gap: 10px; min-height: 88px; padding: 10px 13px 10px 8px;
+    background: #fff; border: 1px solid #d8d8d4; border-radius: 9px;
+    box-shadow: 0 2px 5px #0000000b;
+  }
+  .rank {
+    width: 43px; height: 43px; border-radius: 50%; background: var(--yellow);
+    display: grid; place-items: center; font-size: var(--number-size); font-weight: 1000;
+    line-height: 1;
+  }
+  .photo-wrap {
+    width: 62px; height: 62px; overflow: hidden; border-radius: 50%;
+    background: linear-gradient(135deg, #ffe36a 0 50%, #f5c400 50% 100%);
+    display: grid; place-items: center; position: relative;
+  }
+  .photo-wrap img { width: 100%; height: 100%; object-fit: cover; display: none; }
+  .photo-wrap .initials { font-size: 18px; font-weight: 900; color: #222; }
+  .candidate-info { min-width: 0; }
+  .candidate-name {
+    font-size: var(--name-size); font-weight: 950; line-height: 1.08;
+    text-transform: uppercase; overflow-wrap: anywhere;
+  }
+  .votes { text-align: right; white-space: nowrap; padding-left: 4px; }
+  .vote-count {
+    font-size: var(--vote-size); font-weight: 1000; letter-spacing: -.5px;
+    font-variant-numeric: tabular-nums;
+  }
+  .vote-label { font-size: 9px; font-weight: 900; letter-spacing: .6px; }
+  .candidate:first-child { border: 2px solid #d7b300; }
+  .footer { text-align: center; color: var(--muted); font-size: 11px; margin-top: 16px; }
 
-    h2 {
-      font-size: 2rem;
-      color: #1e6200;
-      margin-bottom: 1.5rem;
-    }
-
-    .iframe-wrapper {
-      position: relative;
-      width: 100%;
-      height: 500px;
-      margin-bottom: 1rem;
-      text-align: center;
-      padding-left: 50px;
-    }
-
-    iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-      border-radius: 12px;
-      font: 4em sans-serif;
-    }
-
-    .loader {
-      border: 6px solid #333;
-      border-top: 6px solid #00bcd4;
-      border-radius: 50%;
-      width: 50px;
-      height: 50px;
-      animation: spin 1s linear infinite;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 10;
-    }
-
-     .vvcclogo {
-      width: 50px;
-      height: 50px;
-    }
-
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
-    .caption {
-      font-size: 1.4rem;
-      color: #1e6200;
-      margin-top: 0px;
-      margin-bottom: 0px;
-    }
-     @media screen and (max-width: 600px) {
-      h2 {
-        font-size: 1.5rem;
-        text-align: center;
-        flex-direction: column;
-      }
-      .iframe-wrapper {
-      padding-left: 0px; 
-    }
-
-    .swipe{
-      font-size: 1.2rem;
-    }
-    .vvcclogo {
-      width: 100px;
-      height: 100px; 
-    }
-}
-  </style>
+  @media (max-width: 700px) {
+    body { padding: 18px 10px; }
+    .results { grid-template-columns: 1fr; gap: 8px; }
+    .candidate { min-height: 76px; grid-template-columns: 42px 56px minmax(0,1fr) auto; gap: 8px; }
+    .rank { width: 38px; height: 38px; }
+    .photo-wrap { width: 54px; height: 54px; }
+    .candidate-name { font-size: max(14px, calc(var(--name-size) - 2px)); }
+    .vote-count { font-size: max(16px, calc(var(--vote-size) - 2px)); }
+  }
+  @media print {
+    body { background: #fff; padding: 0; }
+.candidate { break-inside: avoid; box-shadow: none; }
+  }
+</style>
 </head>
 <body>
-  <div class="container">
-    <div class="card">
-        <h2 style="display: flex; justify-content: center; align-items: center; gap: 0.5rem; font-size: 2rem; color: #007704d4; margin-bottom: 1.5rem;">
-            <img class="vvcclogo" src="images/vvcclogo.png" alt="Election Icon">
-           VVCC Election <span style="color: #ffffff;">2025</span>
-          </h2>
+<div class="wrap">
+<header class="masthead">
+    <h1>VVCCI Election Results 2026</h1>
+    <p>Partial and unofficial results as of <span class="asof" id="asOf">NOVEMBER 21, 2026 / 8:00 PM</span></p>
+  </header>
 
-      <div class="iframe-wrapper">
-        <div id="spinner" class="loader"></div>
-        <iframe 
-          id="electionChart"
-          src="https://docs.google.com/spreadsheets/d/e/2PACX-1vT8_i1tAD0SXncRrlf-lAByo5I1pHQGP0gZBPIwt5LPtF1SCJ4GAZ-494lJ7vJYDD70u21cH8ro9LAZ/pubchart?oid=179818544&amp;format=interactive"
-          onload="document.getElementById('spinner').style.display='none';">
-        </iframe>
-      </div>
-      <p class="swipe" style="color: darkred;"> <strong> For best experience on mobile, swipe left or right to view the entire chart.</strong></p>
-      <p class="caption">
-        ⚠️ <strong style="color: #ff0000;">Note:</strong> Only <span style="color: #007704;">valid votes</span> are counted.<br>
-        This chart is updated in real-time from the official Google Form.
-      </p>
-    </div>
-  </div>
+  <main class="results" id="results">
+    <article class="candidate"><div class="rank">1</div><div class="photo-wrap"><span class="initials">MI</span><img src="images/abundo_2026.jpg" alt="ABUNDO, Michael David I. III"></div>
+      <div class="candidate-info"><div class="candidate-name">ABUNDO, Michael David I. III</div></div>
+      <div class="votes"><div class="vote-count">0</div><div class="vote-label">VOTES</div></div></article>
+    <article class="candidate"><div class="rank">2</div><div class="photo-wrap"><span class="initials">FC</span><img src="images/cancio_2026.jpg" alt="CANCIO, Francis David R."></div>
+      <div class="candidate-info"><div class="candidate-name">CANCIO, Francis David R.</div></div><div class="votes"><div class="vote-count">0</div><div class="vote-label">VOTES</div></div></article>
+    <article class="candidate"><div class="rank">3</div><div class="photo-wrap"><span class="initials">RC</span><img src="images/corpuz_2026.png" alt="CORPUZ, Renato B. Jr."></div>
+      <div class="candidate-info"><div class="candidate-name">CORPUZ, Renato B. Jr.</div></div><div class="votes"><div class="vote-count">0</div><div class="vote-label">VOTES</div></div></article>
+    <article class="candidate"><div class="rank">4</div><div class="photo-wrap"><span class="initials">GD</span><img src="images/dela-paz_2026.jpg" alt="DELA PAZ, Gilbert T."></div>
+      <div class="candidate-info"><div class="candidate-name">DELA PAZ, Gilbert T.</div></div><div class="votes"><div class="vote-count">0</div><div class="vote-label">VOTES</div></div></article>
+    <article class="candidate"><div class="rank">5</div><div class="photo-wrap"><span class="initials">RI</span><img src="images/ifurung_2026.jpg" alt="IFURUNG, Rey Nathaniel F."></div>
+      <div class="candidate-info"><div class="candidate-name">IFURUNG, Rey Nathaniel F.</div></div><div class="votes"><div class="vote-count">0</div><div class="vote-label">VOTES</div></div></article>
+    <article class="candidate"><div class="rank">6</div><div class="photo-wrap"><span class="initials">RL</span><img src="images/lozada_2026.png" alt="LOZADA, Rodolfo Enrico A."></div>
+      <div class="candidate-info"><div class="candidate-name">LOZADA, Rodolfo Enrico A.</div></div><div class="votes"><div class="vote-count">0</div><div class="vote-label">VOTES</div></div></article>
+    <article class="candidate"><div class="rank">7</div><div class="photo-wrap"><span class="initials">AM</span><img src="images/mendiola_2026.jpg" alt="MENDIOLA, Alberto S."></div>
+      <div class="candidate-info"><div class="candidate-name">MENDIOLA, Alberto S.</div></div><div class="votes"><div class="vote-count">0</div><div class="vote-label">VOTES</div></div></article>
+    <article class="candidate"><div class="rank">8</div><div class="photo-wrap"><span class="initials">MP</span><img src="images/pichel_2026.jpg" alt="PICHEL, Michael Christian R."></div>
+      <div class="candidate-info"><div class="candidate-name">PICHEL, Michael Christian R.</div></div><div class="votes"><div class="vote-count">0</div><div class="vote-label">VOTES</div></div></article>
+    <article class="candidate"><div class="rank">9</div><div class="photo-wrap"><span class="initials">JR</span><img src="images/ramnani_2026.jpg" alt="RAMNANI, Jethanand A."></div>
+      <div class="candidate-info"><div class="candidate-name">RAMNANI, Jethanand A.</div></div><div class="votes"><div class="vote-count">0</div><div class="vote-label">VOTES</div></div></article>
+    <article class="candidate"><div class="rank">10</div><div class="photo-wrap"><span class="initials">JS</span><img src="images/san-agustin_2026.jpg" alt="SAN AGUSTIN, Joaquin L."></div>
+      <div class="candidate-info"><div class="candidate-name">SAN AGUSTIN, Joaquin L.</div></div><div class="votes"><div class="vote-count">0</div><div class="vote-label">VOTES</div></div></article>
+    <article class="candidate"><div class="rank">11</div><div class="photo-wrap"><span class="initials">JT</span><img src="images/tayag_2026.jpg" alt="TAYAG, Jose S. Jr."></div>
+      <div class="candidate-info"><div class="candidate-name">TAYAG, Jose S. Jr.</div></div><div class="votes"><div class="vote-count">0</div><div class="vote-label">VOTES</div></div></article>
+    <article class="candidate"><div class="rank">12</div><div class="photo-wrap"><span class="initials">EW</span><img src="images/wenceslao_2026.jpg" alt="WENCESLAO, Edwin Michael C."></div>
+      <div class="candidate-info"><div class="candidate-name">WENCESLAO, Edwin Michael C.</div></div><div class="votes"><div class="vote-count">0</div><div class="vote-label">VOTES</div></div></article>
+    <article class="candidate"><div class="rank">13</div><div class="photo-wrap"><span class="initials">DZ</span><img src="images/zuniga_2026.jpg" alt="ZUÑIGA, Davee M."></div>
+      <div class="candidate-info"><div class="candidate-name">ZUÑIGA, Davee M.</div></div><div class="votes"><div class="vote-count">0</div><div class="vote-label">VOTES</div></div></article>
+  </main>
+  <p class="footer">VVCCI OFFICIAL TALLY • Candidates automatically ranked by votes</p>
+</div>
+
+<script>
+document.querySelectorAll(".photo-wrap img").forEach((img) => {
+    const initials = img.previousElementSibling;
+
+    img.addEventListener("load", () => {
+        img.style.display = "block";
+        if (initials) initials.style.display = "none";
+    });
+
+    img.addEventListener("error", () => {
+        img.style.display = "none";
+        if (initials) initials.style.display = "block";
+    });
+
+    if (img.complete && img.naturalWidth > 0) {
+        img.style.display = "block";
+        if (initials) initials.style.display = "none";
+    }
+});
+
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbywTtSccI6ivw4kzI-KHMzGdbBTTgBUZEVpzYwhq28FIPvXgaZwhRUYm2Tsm2EXIyV_/exec";
+
+function handleSheetData(data) {
+    const resultsContainer = document.getElementById("results");
+    const existingCards = Array.from(
+        resultsContainer.querySelectorAll(".candidate")
+    );
+
+    // Match each Google Sheets row to its existing card by candidate name.
+    // This keeps each candidate's photo attached to the correct person.
+    const normalizeName = value =>
+        String(value || "").trim().toUpperCase().replace(/\\s+/g, " ");
+
+    const cardByName = new Map(
+        existingCards.map(card => [
+            normalizeName(card.querySelector(".candidate-name").textContent),
+            card
+        ])
+    );
+
+    const rankedResults = data
+        .map((item, originalIndex) => ({
+            name: item.name,
+            votes: Number(item.votes) || 0,
+            originalIndex
+        }))
+        .sort((a, b) => b.votes - a.votes || a.originalIndex - b.originalIndex);
+
+    rankedResults.forEach((item, index) => {
+        const card = cardByName.get(normalizeName(item.name));
+        if (!card) return;
+
+        // Update the candidate's displayed name, vote total and live rank.
+        card.querySelector(".candidate-name").textContent = item.name;
+        card.querySelector(".vote-count").textContent =
+            item.votes.toLocaleString("en-US");
+        card.querySelector(".rank").textContent = index + 1;
+
+        // Reordering the existing card preserves its photo and other styling.
+        resultsContainer.appendChild(card);
+    });
+}
+
+function syncGoogleSheet() {
+    const oldScript = document.getElementById("google-sheet-sync");
+    if (oldScript) oldScript.remove();
+
+    const script = document.createElement("script");
+    script.id = "google-sheet-sync";
+    script.src = GOOGLE_SCRIPT_URL +
+        "?callback=handleSheetData&t=" + Date.now();
+
+    document.body.appendChild(script);
+
+    script.onload = () => script.remove();
+    script.onerror = () => script.remove();
+}
+
+// Initial load
+syncGoogleSheet();
+
+// Auto-refresh every 5 seconds
+setInterval(syncGoogleSheet, 5000);
+</script>
 </body>
 </html>
