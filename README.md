@@ -1,2 +1,2 @@
 # VVCCi
-VVCCi Election 2025
+VVCCi Election 2026
