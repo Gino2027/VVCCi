@@ -22,12 +22,16 @@
     font-family: var(--font);
   }
 
-  body {
+body {
+    margin: 0;
+    min-height: 100vh;
+
     background-image: url("images/vvcci_background.png");
-    background-size: cover;
+    background-size: 100% 100%;
     background-position: center top;
     background-repeat: no-repeat;
-    background-attachment: fixed;
+    background-attachment: scroll;
+    background-color: #f5f5f5;
 }
   .wrap { max-width: 1050px; margin: auto; }
 
@@ -99,6 +103,14 @@
 .candidate { break-inside: avoid; box-shadow: none; }
   }
 
+  @media screen and (max-width: 768px) {
+    body {
+        background-size: auto 100%;
+        background-position: center top;
+        background-attachment: scroll;
+    }
+}
+
   .results-header {
     display: flex;
     justify-content: center;
@@ -130,7 +142,7 @@
     <img src="images/vvcclogo.png"
          alt="VVCCI Logo"
          class="site-logo">
-    <h1>Election Results 2026</h1>
+    <h1>VVCCI Election Results 2026</h1>
     <div class="results-header">
     <span id="results-status">
     </span>
