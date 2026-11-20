@@ -4,6 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <title>VVCCI Election Results 2026</title>
 <style>
   :root {
@@ -11,16 +12,11 @@
     --yellow: #00ef6c;
     --ink: #101010;
     --muted: #666;
-    --font: "Arial", sans-serif;
-    --number-size: 26px;
-    --name-size: 16px;
-    --vote-size: 32px;
+    --number-size: 28px;
+    --name-size: 17px;
+    --vote-size: 35px;
   }
   * { box-sizing: border-box; }
-  body {
-    margin: 0; padding: 28px 16px; color: var(--ink);
-    font-family: var(--font);
-  }
 
 body {
     margin: 0;
@@ -32,7 +28,15 @@ body {
     background-repeat: no-repeat;
     background-attachment: scroll;
     background-color: #f5f5f5;
+
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 780;
 }
+
   .wrap { max-width: 1050px; margin: auto; }
 
   .masthead { text-align: center; margin: 0 0 16px; }
@@ -62,6 +66,7 @@ body {
     align-items: center; gap: 10px; min-height: 88px; padding: 10px 13px 10px 8px;
     background: #fff; border: 1px solid #d8d8d4; border-radius: 9px;
     box-shadow: 0 2px 5px #0000000b;
+    font-style:normal;
   }
   .rank {
     width: 43px; height: 43px; border-radius: 50%; background: var(--yellow);
@@ -77,12 +82,12 @@ body {
   .photo-wrap .initials { font-size: 18px; font-weight: 900; color: #222; }
   .candidate-info { min-width: 0; }
   .candidate-name {
-    font-size: var(--name-size); font-weight: 950; line-height: 1.08;
+    font-size: var(--name-size); font-weight: 780; line-height: 1.08;
     text-transform: uppercase; overflow-wrap: anywhere;
   }
   .votes { text-align: right; white-space: nowrap; padding-left: 4px; }
   .vote-count {
-    font-size: var(--vote-size); font-weight: 1000; letter-spacing: -.5px;
+    font-size: var(--vote-size); font-weight: 900; letter-spacing: -.5px;
     font-variant-numeric: tabular-nums;
   }
   .vote-label { font-size: 9px; font-weight: 900; letter-spacing: .6px; }
