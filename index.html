@@ -34,6 +34,8 @@
     margin: 10px 0 0; font-size: 12px; font-weight: 800; letter-spacing: .7px;
     text-transform: uppercase;
   }
+  .masthead .site-logo { width: 100px; height: auto; margin-bottom: 10px; }
+
   .masthead .asof { background: var(--ink); color: white; padding: 3px 8px; }
   .results {
     display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -92,7 +94,7 @@
     flex-wrap: wrap;
     gap: 6px;
     margin-top: 10px;
-    font-size: 18px;
+    font-size: 12px;
     font-weight: 900;
     letter-spacing: .6px;
     text-transform: uppercase;
@@ -112,6 +114,10 @@
 <body>
 <div class="wrap">
 <header class="masthead">
+
+    <img src="images/vvcclogo.png"
+         alt="VVCCI Logo"
+         class="site-logo">
     <h1>VVCCI Election Results 2026</h1>
     <div class="results-header">
     <span id="results-status">
